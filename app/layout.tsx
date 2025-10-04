@@ -19,6 +19,8 @@ export const metadata: Metadata = {
     'cat voices',
     'Meoww App',
     'Meoww Website',
+    'Cat Father',
+    'Cat Parent',
     'Cat website',
     'Animal Voices',
     'Pss-Pss-Pss',
