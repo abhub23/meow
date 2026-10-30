@@ -6,31 +6,27 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://meoww.abdullahtech.dev'),
-  title: 'Meoww - Talk with your loved ones',
+  title: 'Meoww - Cat catalogue',
   icons: {
     icon: '/cat.webp',
   },
-  description: 'Application to talk with cats with some minimum set of convos',
+  description: 'A playful cat catalogue for browsing breeds and adorable cat portraits.',
 
   keywords: [
     'Cats',
-    'Cat voices',
-    'Catsvoice',
-    'cat voices',
+    'Cat catalogue',
+    'Cat breeds',
     'Meoww App',
     'Meoww Website',
     'Cat Father',
     'Cat Parent',
     'Cat website',
-    'Animal Voices',
-    'Pss-Pss-Pss',
     'All about cat',
-    'cute cats voices',
-    'voices of animals',
-    'cat and talk',
+    'cute cats',
+    'cat gallery',
+    'feline breeds',
     'cats are adorable',
-    'cats for the president',
-    'cats are the best',
+    'cat collection',
   ],
   authors: {
     url: 'https://github.com/abhub23',
@@ -43,7 +39,7 @@ export const metadata: Metadata = {
     site: '@abdullah_twt23',
     creator: '@abdullah_twt23',
     title: 'abdullah_twt23',
-    description: 'Talk with your Cat',
+    description: 'Cat catalogue for browsing breeds and portraits',
     images: {
       url: 'https://abdullahtech.dev/og-image.png',
       type: 'image/png',
