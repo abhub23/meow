@@ -1,25 +1,15 @@
 'use client';
 
-import { useCatname } from '@/store/store';
-import React, { useEffect, useState } from 'react';
-import { RainbowButton } from './magicui/rainbow-button';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
 import { ToggleTheme } from './ToggleTheme';
-import { motion } from 'motion/react';
-import { Separator } from './ui/separator';
 import { useTheme } from 'next-themes';
 import { useQuery } from '@tanstack/react-query';
-import Spinner from './Spinner';
 
 const Hero = () => {
-  const { catName, setCatName } = useCatname();
   const { theme } = useTheme();
 
-  const router = useRouter();
-
-  const { data, isLoading, isSuccess } = useQuery({
+  const { data } = useQuery({
     queryKey: ['catquery'],
     queryFn: async () => {
       const res = await axios.get('https://api.thecatapi.com/v1/images/search', {
@@ -30,27 +20,6 @@ const Hero = () => {
       return res.data;
     },
   });
-
-  function useWindowWidth() {
-    const [width, setWidth] = useState<number | null>(null);
-
-    useEffect(() => {
-      const handleResize = () => setWidth(window.innerWidth);
-      handleResize(); // Set initial value
-
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    return width;
-  }
-
-  const width = useWindowWidth();
-
-  const handleVoicePage = () => {
-    const trimmedName = catName.split(' ').join('');
-    router.push(`/voice?breed=${trimmedName}`);
-  };
 
   return (
     <>
@@ -70,17 +39,14 @@ const Hero = () => {
             }`,
           }}
         />
-        <div className="relative flex h-[100svh] flex-col items-center justify-center overflow-hidden text-black lg:h-screen lg:flex-row lg:gap-40 dark:text-white">
+        <div className="relative grid h-[100svh] w-full place-items-center overflow-hidden text-black lg:h-screen dark:text-white">
           <div className="fixed top-[20px] right-[20px] lg:right-[30px]">
             <ToggleTheme />
           </div>
-          <div className="mt-[-100px] lg:mt-[0px]">
-            <p className="p-2 text-center text-[22px] font-medium lg:text-[30px]">
-              Random Cat&apos;s
-            </p>
-            {!isLoading && isSuccess ? (
+          <div className="flex items-center justify-center">
+            {data?.[0]?.url ? (
               <Image
-                alt=""
+                alt="Random cat"
                 src={data[0].url}
                 width={360}
                 height={300}
@@ -88,49 +54,8 @@ const Hero = () => {
                 priority={true}
                 unoptimized={true}
               />
-            ) : (
-              <Spinner />
-            )}
+            ) : null}
           </div>
-          <div className="font-black lg:h-[500px]">
-            <Separator orientation={width !== null && width > 1460 ? 'vertical' : 'horizontal'} />
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col items-center justify-center"
-          >
-            <label htmlFor="cats" className="p-4 text-[22px] font-medium lg:text-[30px]">
-              Choose your Breed
-            </label>
-            <select
-              id="cat breeds"
-              name="cat_breeds"
-              defaultValue="Persian"
-              className="cursor-pointer overflow-hidden rounded-[6px] border-black p-[12px] text-[18px] ring-1 dark:border-white dark:bg-black"
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCatName(e.target.value)}
-            >
-              <option value="Indian Domestic Shorthair">Indian Domestic Shorthair</option>
-              <option value="Persian">Persian</option>
-              <option value="Siamese">Siamese</option>
-              <option value="Bengal">Bengal</option>
-              <option value="Birman">Birman</option>
-              <option value="Maine Coon">Maine Coon</option>
-              <option value="British Shorthair">British Shorthair</option>
-              <option value="Exotic Shorthair">Exotic Shorthair</option>
-              <option value="Scottish Fold">Scottish Fold</option>
-              <option value="Oriental Shorthair">Oriental Shorthair</option>
-            </select>
-
-            <RainbowButton
-              variant={'default'}
-              className="mt-[18px] h-[40px] w-[263px] text-[17px] lg:mt-[16px]"
-              onClick={handleVoicePage}
-            >
-              Talk to Cat
-            </RainbowButton>
-          </motion.div>
         </div>
       </div>
     </>
