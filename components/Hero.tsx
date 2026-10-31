@@ -20,8 +20,8 @@ const Hero = () => {
 
   return (
     <div className="cat-page-background relative min-h-screen w-full">
-      <div className="relative grid h-[100svh] w-full place-items-center overflow-hidden text-black lg:h-screen dark:text-white">
-        <div className="fixed top-[20px] right-[20px] lg:right-[30px]">
+      <div className="relative grid h-svh w-full place-items-center overflow-hidden text-black lg:h-screen dark:text-white">
+        <div className="fixed top-5 right-5 lg:right-7.5">
           <ToggleTheme />
         </div>
         <div className="flex items-center justify-center">
@@ -31,7 +31,7 @@ const Hero = () => {
               src={data[0].url}
               width={360}
               height={300}
-              className="rounded-[4px]"
+              className="rounded-lg"
               priority={true}
               unoptimized={true}
             />
