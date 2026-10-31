@@ -1,16 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { ToggleTheme } from './ToggleTheme';
-
-const CatViewer = dynamic(() => import('./CatViewer'), {
-  ssr: false,
-  loading: () => (
-    <div className="grid h-full w-full place-items-center">
-      <div className="size-40 animate-pulse rounded-full bg-black/5 dark:bg-white/5" />
-    </div>
-  ),
-});
 
 const Hero = () => {
   return (
@@ -20,7 +10,6 @@ const Hero = () => {
           <ToggleTheme />
         </div>
         <div className="h-svh w-full lg:h-screen">
-          <CatViewer />
         </div>
       </div>
     </div>
